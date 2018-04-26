@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
 using Microsoft.AspNet.Identity;
 
-namespace POC.CognitoAuth
+namespace AspMvcAuthenticationWithAwsCognito
 {
-    public interface ICongnitoStore:IUserStore<CognitoUser> {
+    public interface ICongnitoStore : IUserStore<CognitoUser>
+    {
 
     }
+
     public class CognitoUserStore : ICongnitoStore
-        
-        
+
+
     {
         private readonly AmazonCognitoIdentityProviderClient _client =
             new AmazonCognitoIdentityProviderClient();
@@ -39,12 +38,26 @@ namespace POC.CognitoAuth
                 Value = user.Email
             };
             signUpRequest.UserAttributes.Add(emailAttribute);
-            
+
 
             _client.SignUpAsync(signUpRequest);
             _client.AdminConfirmSignUp(new AdminConfirmSignUpRequest { Username = user.Email, UserPoolId = _poolId });
 
             return Task.CompletedTask;
+        }
+
+        public void AddUsertoGroup(string username, string groupname)
+        {
+            try
+            {
+                var addUserToGroup = new AdminAddUserToGroupRequest { GroupName = groupname, Username = username, UserPoolId = _poolId };
+                _client.AdminAddUserToGroup(new AdminAddUserToGroupRequest());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
 
         public Task DeleteAsync(CognitoUser user)
@@ -72,6 +85,6 @@ namespace POC.CognitoAuth
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

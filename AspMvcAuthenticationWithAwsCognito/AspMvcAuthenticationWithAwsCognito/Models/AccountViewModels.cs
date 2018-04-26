@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace POC.CognitoAuth.Models
+namespace AspMvcAuthenticationWithAwsCognito.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

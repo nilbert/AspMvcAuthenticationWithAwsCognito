@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
+﻿using System.Configuration;
 using System.Threading.Tasks;
-using System.Web;
 using Amazon.CognitoIdentityProvider;
 using Amazon.CognitoIdentityProvider.Model;
 using Microsoft.AspNet.Identity;
 
-namespace POC.CognitoAuth
+namespace AspMvcAuthenticationWithAwsCognito
 {
 
     public class CognitoUserManager : UserManager<CognitoUser>

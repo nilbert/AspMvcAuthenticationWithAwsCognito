@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using AspMvcAuthenticationWithAwsCognito;
+using AspMvcAuthenticationWithAwsCognito.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using POC.CognitoAuth.Models;
 
 namespace POC.CognitoAuth.Controllers
 {
